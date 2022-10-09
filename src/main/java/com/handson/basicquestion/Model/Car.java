@@ -9,8 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Car {
     @Id
     private String id;
-    @Indexed(unique = true)
-    private String carName;
     @NonNull
     private Double longitude;
     @NonNull
@@ -20,7 +18,6 @@ public class Car {
     public String toString() {
                 return "Car{" +
                                 "id='" + id + '\'' +
-                                ", name='" + carName + '\'' +
                                 ", longitude=" + longitude +
                                 ", latitude=" + latitude +
                                 '}';
@@ -34,34 +31,27 @@ public class Car {
         this.id = id;
     }
 
-    public String getCarName() {
-        return carName;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
-    }
-
+    @NonNull
     public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(@NonNull Double longitude) {
         this.longitude = longitude;
     }
 
+    @NonNull
     public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(@NonNull Double latitude) {
         this.latitude = latitude;
     }
 
 
     public static final class CarBuilder {
         private String id;
-        private String carName;
         private Double longitude;
         private Double latitude;
 
@@ -74,11 +64,6 @@ public class Car {
 
         public CarBuilder id(String id) {
             this.id = id;
-            return this;
-        }
-
-        public CarBuilder carName(String carName) {
-            this.carName = carName;
             return this;
         }
 
@@ -95,7 +80,6 @@ public class Car {
         public Car build() {
             Car car = new Car();
             car.setId(id);
-            car.setCarName(carName);
             car.setLongitude(longitude);
             car.setLatitude(latitude);
             return car;
