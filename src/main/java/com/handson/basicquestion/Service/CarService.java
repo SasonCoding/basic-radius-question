@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.handson.basicquestion.Model.Car.CarBuilder.aCar;
 
@@ -13,6 +14,15 @@ import static com.handson.basicquestion.Model.Car.CarBuilder.aCar;
 public class CarService {
     @Autowired
     CarRepository carRepository;
+
+    public Car findCar (String carId) {
+        Optional<Car> carOptional = carRepository.findById(carId);
+        if (carOptional.isPresent()) {
+            return carOptional.get();
+        }else {
+            throw new RuntimeException("No car was found with this: '" + carId + "' id");
+        }
+    }
 
     public List<Car> findAllCars() {
         return carRepository.findAll();

@@ -19,30 +19,31 @@ public class AppController {
     @Autowired
     CarService carService;
 
-    @RequestMapping(value = "/createCar", method = RequestMethod.POST)
-    public ResponseEntity<?> insertCar(@RequestParam String carId, @RequestParam Double latitude, @RequestParam Double longitude) {
-        Car car = carService.insertCar(carId, latitude, longitude);
-        return new ResponseEntity<>(car.toString(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/checkRadius", method = RequestMethod.GET)
-    public ResponseEntity<?> checkRadius(@RequestParam Double centerLatitude, @RequestParam Double centerLongitude, @RequestParam Double radius) {
-        List<Car> carsInDistance =  locationService.checkCarsInRadius(centerLatitude, centerLongitude, radius);
-
-        if (carsInDistance.size() < 1) {
-            return new ResponseEntity<>("No cars were found in this radius.", HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(carsInDistance, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/findCars", method = RequestMethod.GET)
+    @RequestMapping(value = "/cars", method = RequestMethod.GET)
     public ResponseEntity<?> findCars() {
         return new ResponseEntity<>(carService.findAllCars(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/deleteCar", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteCar(@RequestParam String carId) {
+    @RequestMapping(value = "/car/{carId}", method = RequestMethod.GET)
+    public ResponseEntity<?> findCar(@PathVariable String carId) {
+        return new ResponseEntity<>(carService.findCar(carId), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/car", method = RequestMethod.POST)
+    public ResponseEntity<Car> insertCar(@RequestBody Car requestCar) {
+        Car car = carService.insertCar(requestCar.getId(), requestCar.getLatitude(), requestCar.getLongitude());
+        return new ResponseEntity<>(car, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/checkRadius", method = RequestMethod.GET)
+    public ResponseEntity<?> checkRadius(@RequestParam Double centerLatitude, @RequestParam Double centerLongitude, @RequestParam Double radius) {
+        List<Car> carsInDistance = locationService.checkCarsInRadius(centerLatitude, centerLongitude, radius);
+
+        return new ResponseEntity<>(carsInDistance, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/car/{carId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteCar(@PathVariable String carId) {
         carService.deleteCar(carId);
         return new ResponseEntity<>("Car: " + carId + " was successfully deleted", HttpStatus.OK);
     }

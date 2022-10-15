@@ -19,11 +19,11 @@ public class LocationService {
 
         List<Car> carsInDistance = cars.stream().filter(car -> {
             Integer RadiusInKm = 6371;
-            Double dLat = deg2rad(cars.get(0).getLatitude() - centerLatitude);  // deg2rad below
-            Double dLon = deg2rad(cars.get(0).getLongitude() - centerLongitude);
+            Double dLat = deg2rad(car.getLatitude() - centerLatitude);  // deg2rad below
+            Double dLon = deg2rad(car.getLongitude() - centerLongitude);
             Double a =
                     Math.sin(dLat/2) * Math.sin(dLat/2) +
-                            Math.cos(deg2rad(cars.get(0).getLatitude())) * Math.cos(deg2rad(centerLatitude)) *
+                            Math.cos(deg2rad(car.getLatitude())) * Math.cos(deg2rad(centerLatitude)) *
                                     Math.sin(dLon/2) * Math.sin(dLon/2);
             Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             Double d = RadiusInKm * c; // Distance in km

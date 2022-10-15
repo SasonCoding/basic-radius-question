@@ -2,8 +2,9 @@ package com.handson.basicquestion.Model;
 
 import com.mongodb.lang.NonNull;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Objects;
 
 @Document(collection = "Car")
 public class Car {
@@ -49,6 +50,18 @@ public class Car {
         this.latitude = latitude;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return Objects.equals(id, car.id) && longitude.equals(car.longitude) && latitude.equals(car.latitude);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, longitude, latitude);
+    }
 
     public static final class CarBuilder {
         private String id;
