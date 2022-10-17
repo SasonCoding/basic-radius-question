@@ -32,6 +32,7 @@ public class AppController {
     @RequestMapping(value = "/car", method = RequestMethod.POST)
     public ResponseEntity<Car> insertCar(@RequestBody Car requestCar) {
         Car car = carService.insertCar(requestCar.getId(), requestCar.getLatitude(), requestCar.getLongitude());
+
         return new ResponseEntity<>(car, HttpStatus.OK);
     }
 

@@ -27,7 +27,6 @@ class CarRepositoryTest {
     @Autowired
     AppController appController;
 
-    
     @Test
     public void checkInsertTest() {
         Car testCar = ts.insertCarInLocation(Locations.ASHDOD);
@@ -36,7 +35,6 @@ class CarRepositoryTest {
 
         assertEquals(insertedCar, testCar);
     }
-
 
     @Test
     public void checkRadius_success() {

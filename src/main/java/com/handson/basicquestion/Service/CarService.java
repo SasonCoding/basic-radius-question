@@ -2,11 +2,12 @@ package com.handson.basicquestion.Service;
 
 import com.handson.basicquestion.Model.Car;
 import com.handson.basicquestion.Repository.CarRepository;
+import com.handson.basicquestion.Util.HandsonException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.handson.basicquestion.Model.Car.CarBuilder.aCar;
 
@@ -16,12 +17,7 @@ public class CarService {
     CarRepository carRepository;
 
     public Car findCar (String carId) {
-        Optional<Car> carOptional = carRepository.findById(carId);
-        if (carOptional.isPresent()) {
-            return carOptional.get();
-        }else {
-            throw new RuntimeException("No car was found with this: '" + carId + "' id");
-        }
+        return carRepository.findById(carId).orElseThrow(() -> new EmptyResultDataAccessException("No car was found with this: " + carId + " id", 1));
     }
 
     public List<Car> findAllCars() {
