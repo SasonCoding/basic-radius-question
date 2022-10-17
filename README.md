@@ -14,7 +14,7 @@ the "checkRadius" request will run a complex algorithm that will check if there 
 ASHDOD coordinates:
 Pass this to the POST request in order to create a car: (id: "123", latitude: 31.80056005890851, longitude: 34.66956283384276).
 
-TEL-AVIV center coordinates
+TEL-AVIV center coordinates:
 Pass this to the "checkRadius" request: (centerLatitude :32.09304777948897, centerLongitude: 34.77667953145146, radius: 40.0).
 
 According to "Google Maps" the current distance in Km from ASHDOD to TEL-AVIV is 33.53 Km so when the ASHDOD coordinates are stored in the MongoDB and the user will run
