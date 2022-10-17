@@ -8,7 +8,7 @@ Each car will have a coordinates of Longitude & Latitude that indicates the loca
 
 After the user has inserted his car he can then use the: "checkRadius" request and pass the: centerLongitude, centerLatitude and a radius.
 
-the "checkRadius" request will run a complex algorithm that will check if there are any cars according to the center coordinates and radius in the database.
+the "checkRadius" request will run a complex algorithm that will check if there are any cars in the database that are within the radius of the center coordinates that were given.
 
 ## Example:
 ASHDOD coordinates:
