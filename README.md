@@ -4,6 +4,8 @@ Heroku url: <a href="https://basic-question.herokuapp.com/swagger-ui.html/">basi
 
 The goal of this program is to enable users the options to Create, Read, Update and Delete(CRUD) cars that will be stored in a MongoDB.
 
+This project also follows the guidelines of proper project testing and clean code.
+
 Each car will have a coordinates of Longitude & Latitude that indicates the location of the car on any point on the globe.
 
 After the user has inserted his car he can then use the: "checkRadius" request and pass the: centerLongitude, centerLatitude and a radius.
